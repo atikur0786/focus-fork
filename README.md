@@ -51,9 +51,16 @@ This is **NOT** a toy. It is a tool for professional developers to reclaim their
 - **Server Actions:** For mutations to keep the client thin.
 - **Tailwind v4:** For modern, performant styling.
 - **Strict TypeScript:** No `any`.
+- **Auth.js (v5):** Using GitHub provider for seamless developer login. Minimal data retention (session only).
+
+## 🔐 Security & Auth
+- **Provider:** GitHub OAuth
+- **Data:** We only store the session cookie; no database persistence for users yet (MVP).
+- **Environment:** Requires `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`.
 
 ## 📝 Change Log
-- **2026-01-14:** Initialized project, setup Next.js + Tailwind + shadcn/ui. Created folder structure. Defined Vision & Roadmap.
+- **2026-01-15:** Implemented GitHub Authentication (Phase 2). Added SignIn/SignOut components and updated Landing Page.
+- **2026-01-14:** Initialized project, setup Next.js + Tailwind + shadcn/ui. Created folder structure. Defined Vision & Roadmap. Switched AI to Gemini.
 
 ---
 *This README is the single source of truth. Do not overwrite without recording changes.*
