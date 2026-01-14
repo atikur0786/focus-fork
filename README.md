@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FocusFork: Open Source Focus Companion
 
-## Getting Started
+> A productivity-focused web application that helps developers build consistent, focused work habits by removing decision fatigue and context switching when contributing to open source.
 
-First, run the development server:
+**Current Date:** 2026-01-14
+**Status:** In Development (Phase 1)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧠 Product Vision
+Contributing to open source is hard not because of code, but because of **decision fatigue**: "What should I work on?", "Do I have time?", "Is this too hard?".
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**DevFlow** solves this by acting as an intelligent Focus Coach:
+1.  **Curates** high-quality, relevant issues instantly.
+2.  **Plans** the session with AI-driven breakdowns.
+3.  **Enforces** deep work with a dedicated focus interface.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This is **NOT** a toy. It is a tool for professional developers to reclaim their flow state.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Tech Stack
+- **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui
+- **Backend:** Next.js API Routes, Octokit (GitHub API)
+- **Auth:** GitHub OAuth (via Auth.js)
+- **AI:** Google Gemini (via Vercel AI SDK)
+- **Observability:** Opik (Evaluation & Logging)
+- **Deployment:** Vercel
 
-## Learn More
+## 🗺 4-Week Roadmap
 
-To learn more about Next.js, take a look at the following resources:
+### Week 1: Foundation & "The Loop" (Current)
+- [x] Project scaffolding & Architecture
+- [ ] GitHub OAuth Authentication
+- [ ] Core "Focus Loop" Interface (UI Skeleton)
+- [ ] Basic Issue Fetching (Octokit)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Week 2: Intelligence & Planning
+- [ ] AI Agent: "Issue Scout" (Smart filtering)
+- [ ] AI Agent: "Focus Coach" (Task breakdown)
+- [ ] Session Planning UI
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Week 3: Deep Work & Habits
+- [ ] Active Focus Timer with blockers/distraction logging
+- [ ] Post-session reflection & metrics
+- [ ] Streak & consistency tracking
 
-## Deploy on Vercel
+### Week 4: Polish & Launch
+- [ ] Opik Integration for AI/Agent Eval
+- [ ] Premium UI Polish (Animations, Dark Mode)
+- [ ] Final Deployment & Documentation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🏗 Architecture Decisions
+- **Next.js App Router:** For server components and simplified data fetching.
+- **Server Actions:** For mutations to keep the client thin.
+- **Tailwind v4:** For modern, performant styling.
+- **Strict TypeScript:** No `any`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 Change Log
+- **2026-01-14:** Initialized project, setup Next.js + Tailwind + shadcn/ui. Created folder structure. Defined Vision & Roadmap.
+
+---
+*This README is the single source of truth. Do not overwrite without recording changes.*
