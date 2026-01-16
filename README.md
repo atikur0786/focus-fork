@@ -53,12 +53,44 @@ This is **NOT** a toy. It is a tool for professional developers to reclaim their
 - **Strict TypeScript:** No `any`.
 - **Auth.js (v5):** Using GitHub provider for seamless developer login. Minimal data retention (session only).
 
+## 🤖 Issue Scout Logic (Phase 3)
+The **Issue Scout** selects the best task using a weighted scoring algorithm:
+
+1.  **Fetch:** Queries GitHub API for `is:open no:assignee language:{target}`.
+2.  **Filter:** Uses labels (`good first issue`, `help wanted`) based on skill level.
+3.  **Score:**
+    -   **+10** Detailed Description (>500 chars)
+    -   **+5** Recent Activity (<3 days)
+    -   **+5** Community Engagement (>0 comments)
+    -   **+5** explicitly labelled `good first issue`
+    -   **-10** Stub/Short Description (<100 chars)
+4.  **Select:** Returns the single highest-scoring issue.
+
+## 🧠 Focus Coach Agent (Phase 4)
+The **Focus Coach** uses **Google Gemini** to prepare the developer for deep work.
+
+-   **Input:** GitHub Issue (Title, Body)
+-   **Prompt Strategy:** "Engineering Manager" persona. Strict "No Code Generation" rule.
+-   **Output:** Structured JSON (Summary, Success Criteria, Step-by-Step Plan).
+-   **Observability:** All reasoning traces logged to **Opik** for quality evaluation.
+
+-   **Observability:** All reasoning traces logged to **Opik** for quality evaluation.
+
+## 🎨 Design System (Phase 5)
+-   **Aesthetic:** "Premium DevTool" (Dark Mode, Deep Charcoal, Electric Indigo).
+-   **Principles:**
+    -   **Glassmorphism:** `bg-white/5 backdrop-blur-md` for cards.
+    -   **Borders over Shadows:** 1px subtle borders (`border-white/10`) instead of heavy dropshadows.
+    -   **Typography:** Inter/Sans-serif with tights tracking for headings.
+    -   **Layout:** Dashboard uses a Sidebar-driven layout similar to VS Code/Linear.
+
 ## 🔐 Security & Auth
 - **Provider:** GitHub OAuth
 - **Data:** We only store the session cookie; no database persistence for users yet (MVP).
 - **Environment:** Requires `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`.
 
 ## 📝 Change Log
+- **2026-01-16:** Implemented **Focus Coach Agent** (Phase 4). Integrated Gemini 1.5 Pro and Opik for tracing. Implemented **Issue Scout** logic (Phase 3).
 - **2026-01-15:** Implemented GitHub Authentication (Phase 2). Added SignIn/SignOut components and updated Landing Page.
 - **2026-01-14:** Initialized project, setup Next.js + Tailwind + shadcn/ui. Created folder structure. Defined Vision & Roadmap. Switched AI to Gemini.
 
