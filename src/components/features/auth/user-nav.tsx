@@ -32,16 +32,15 @@ export function UserNav({ user }: { user: any }) {
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem asChild className="cursor-pointer">
                     <form
                         action={async () => {
                             "use server"
-                            await signOut()
+                            await signOut({ redirectTo: "/" })
                         }}
-                        className="w-full"
                     >
-                        <button className="w-full text-left" type="submit">
-                            Sign Out
+                        <button className="w-full text-left flex items-center" type="submit">
+                            Sign out
                         </button>
                     </form>
                 </DropdownMenuItem>

@@ -1,8 +1,14 @@
 
 "use server"
 
-import { scoutIssue } from "@/lib/github/scout"
+import { scoutIssue, searchGitHubIssues } from "@/lib/github/scout"
 import { createFocusPlan } from "@/lib/ai/coach"
+
+export async function searchPublicIssuesAction(query: string) {
+    if (!query) return []
+    // Limit to 10 for public browser to be safe/fast
+    return await searchGitHubIssues(query, 10)
+}
 
 export async function startSessionAction(formData: FormData) {
     const language = formData.get("language") as string || "typescript"

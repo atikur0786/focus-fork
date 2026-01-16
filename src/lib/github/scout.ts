@@ -7,6 +7,42 @@ const octokit = new Octokit({
     auth: process.env.AUTH_GITHUB_TOKEN || process.env.GITHUB_TOKEN, // Fallback
 });
 
+export async function searchGitHubIssues(query: string, limit = 10) {
+    try {
+        const response = await octokit.rest.search.issuesAndPullRequests({
+            q: `${query} is:issue is:open`,
+            per_page: limit,
+            sort: "updated",
+            order: "desc",
+        });
+        return response.data.items;
+    } catch (error) {
+        console.error("GitHub Search Error:", error);
+        return [];
+    }
+}
+
+export interface GitHubLabel {
+    id: number;
+    name: string;
+    description: string | null;
+    color: string;
+}
+
+export interface GitHubIssue {
+    id: number;
+    number: number;
+    title: string;
+    body: string | null;
+    html_url: string;
+    repository_url: string;
+    created_at: string;
+    updated_at: string;
+    labels: (string | GitHubLabel)[];
+    comments: number;
+    user: any; // Keeping simplified
+}
+
 export interface IssueScoutOptions {
     language: string;
     skillLevel?: "beginner" | "intermediate" | "expert";
@@ -48,7 +84,7 @@ export async function scoutIssue(options: IssueScoutOptions) {
         }
 
         // 3. Score Candidates
-        const scoredCandidates: ScoredIssue[] = candidates.map((issue) => {
+        const scoredCandidates: ScoredIssue[] = (candidates as unknown as GitHubIssue[]).map((issue) => {
             let score = 0;
             const reasons: string[] = [];
 
@@ -79,7 +115,7 @@ export async function scoutIssue(options: IssueScoutOptions) {
             }
 
             // Heuristic D: Labels
-            const labels = issue.labels.map((l: any) => (typeof l === 'string' ? l : l.name?.toLowerCase()));
+            const labels = issue.labels.map((l) => (typeof l === 'string' ? l : l.name?.toLowerCase()));
             if (labels.includes("good first issue")) {
                 score += 5;
                 reasons.push("Beginner friendly (+5)");
