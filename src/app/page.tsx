@@ -66,8 +66,8 @@ export default async function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="h-12 px-8 rounded-full text-base bg-white text-black hover:bg-white/90 font-medium">
-                Start Contributing
+              <Button size="lg" className="h-12 px-8 rounded-full text-base bg-white text-black hover:bg-white/90 font-medium" asChild>
+                <Link href="/dashboard">Start Contributing</Link>
               </Button>
               <Button variant="link" className="text-muted-foreground hover:text-white" asChild>
                 <Link href="#public-browser">Explore Issues</Link>

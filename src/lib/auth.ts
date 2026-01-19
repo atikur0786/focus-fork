@@ -22,5 +22,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
             return true
         },
+        async jwt({ token, account, profile }) {
+            if (account) {
+                token.accessToken = account.access_token
+                token.id = profile?.id
+            }
+            return token
+        },
+        async session({ session, token }) {
+            // @ts-ignore
+            session.accessToken = token.accessToken
+            // @ts-ignore
+            session.user.id = token.id
+            return session
+        },
     },
 })

@@ -108,7 +108,7 @@ export default function FocusSessionPage() {
 
                         {/* Timer Display */}
                         <div className="relative z-10 mb-8">
-                            <div className="text-9xl font-mono font-bold tracking-tighter tabular-nums drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] text-white">
+                            <div className="text-9xl font-mono font-bold tracking-tighter tabular-nums drop-shadow-sm text-foreground">
                                 25:00
                             </div>
                             <p className="text-sm text-muted-foreground uppercase tracking-widest mt-4">Focus Block 1/4</p>

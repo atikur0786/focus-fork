@@ -31,7 +31,7 @@ export default function DashboardPage() {
 
                 {/* Stats Card */}
                 <div className="glass-card rounded-xl p-6 flex flex-col justify-center items-center text-center">
-                    <div className="text-5xl font-bold text-white mb-2">0</div>
+                    <div className="text-5xl font-bold text-foreground mb-2">0</div>
                     <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">Contribution Streak</span>
                 </div>
             </div>
