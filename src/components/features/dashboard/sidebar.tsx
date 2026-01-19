@@ -13,7 +13,10 @@ import {
     User,
     Settings,
     LogOut,
-    Menu
+    Menu,
+    Search,
+    Bot,
+    Code2
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -50,8 +53,10 @@ export function Sidebar({ user }: SidebarProps) {
     }
 
     const navItems = [
-        { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-        { href: "/dashboard/focus", label: "Focus Session", icon: Target },
+        { href: "/dashboard", label: "Explore", icon: Search },
+        { href: "/dashboard/agent", label: "AI Assistant", icon: Bot },
+        { href: "/dashboard/workspaces", label: "My Workspaces", icon: Code2 },
+        { href: "/dashboard/focus", label: "Focus Session", icon: Target }, // Keeping for backward compat logic for now
         { href: "/dashboard/history", label: "History", icon: History, disabled: true },
     ]
 

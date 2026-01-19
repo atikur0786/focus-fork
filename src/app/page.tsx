@@ -4,7 +4,6 @@ import { UserNav } from "@/components/features/auth/user-nav"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { GitBranch, GitMerge, Search, ArrowRight, Code, Zap, Shield, GitFork } from "lucide-react"
-import { PublicIssueBrowser } from "@/components/features/landing/public-issue-browser"
 import { ScrollHeader } from "@/components/features/landing/scroll-header"
 import { SiteFooter } from "@/components/features/landing/site-footer"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -29,7 +28,6 @@ export default async function Home() {
         {/* Right: Nav + Actions */}
         <nav className="flex items-center gap-6">
           <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:block">Process</Link>
-          <Link href="#public-browser" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:block">Explore</Link>
 
           <div className="flex items-center gap-2 pl-4 border-l border-border/40 ml-2">
             <ThemeToggle />
@@ -69,9 +67,6 @@ export default async function Home() {
               <Button size="lg" className="h-12 px-8 rounded-full text-base bg-white text-black hover:bg-white/90 font-medium" asChild>
                 <Link href="/dashboard">Start Contributing</Link>
               </Button>
-              <Button variant="link" className="text-muted-foreground hover:text-white" asChild>
-                <Link href="#public-browser">Explore Issues</Link>
-              </Button>
             </div>
           </div>
         </section>
@@ -95,12 +90,6 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Public Issue Browser */}
-        <section id="public-browser" className="py-32 bg-white/[0.02] border-t border-white/5">
-          <div className="container px-4 md:px-6 mx-auto">
-            <PublicIssueBrowser />
-          </div>
-        </section>
 
         {/* Process Steps (Timeline Style) */}
         <section id="features" className="py-32 border-t border-white/5">

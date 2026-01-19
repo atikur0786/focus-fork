@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { RotateCcw, Play, Loader2, ArrowRight } from "lucide-react"
 import { startSessionAction } from "@/app/actions"
@@ -16,13 +16,25 @@ export default function FocusSessionPage() {
     // Quick Timer state for demo
     const [timeLeft, setTimeLeft] = useState(25 * 60)
 
-    async function handleStart() {
+    // Check for issueUrl in searchParams
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search)
+        const issueUrl = params.get("issueUrl")
+        if (issueUrl && !isActive && !loading) {
+            handleStart(issueUrl)
+        }
+    }, [])
+
+    async function handleStart(issueUrl?: string) {
         setLoading(true)
         try {
             // Hardcoded inputs for MVP demo, can extend form later
             const formData = new FormData()
             formData.append("language", "typescript")
             formData.append("skillLevel", "beginner")
+            if (issueUrl) {
+                formData.append("issueUrl", issueUrl)
+            }
 
             const result = await startSessionAction(formData)
             if (result.error) {
@@ -63,7 +75,7 @@ export default function FocusSessionPage() {
                         </div>
                     </div>
 
-                    <Button className="w-full h-12 text-base" size="lg" onClick={handleStart} disabled={loading}>
+                    <Button className="w-full h-12 text-base" size="lg" onClick={() => handleStart()} disabled={loading}>
                         {loading ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

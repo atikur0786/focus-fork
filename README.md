@@ -28,14 +28,17 @@ This is **NOT** a toy. It is a tool for professional developers to reclaim their
 ### Week 1: Foundation & "The Loop" (Current)
 - [x] Project scaffolding & Architecture
 - [x] GitHub OAuth Authentication
-- [x] Landing Page (High Fidelity - Ogaki Inspired) & Public Issue Browser
-- [ ] Core "Focus Loop" Interface (UI Skeleton)
-- [x] Basic Issue Fetching (Octokit)
+### Week 1: Foundation & "The Loop" (Current)
+- [x] Project scaffolding & Architecture
+- [x] GitHub OAuth Authentication
+- [x] Landing Page & Public Issue Browser (Refactored to Dashboard)
+- [x] Workspace Environment (Monaco Editor)
+- [x] AI Chat Interface (Issue Scout)
 
 ### Week 2: Intelligence & Planning
-- [x] AI Agent: "Issue Scout" (Smart filtering)
+- [x] AI Agent: "Issue Scout" (Chat-driven discovery)
 - [x] AI Agent: "Focus Coach" (Task breakdown)
-- [ ] Session Planning UI
+- [ ] Real-time GitHub Fork & PR integration
 
 ### Week 3: Deep Work & Habits
 - [ ] Active Focus Timer with blockers/distraction logging
@@ -99,7 +102,9 @@ The **Focus Coach** uses **Google Gemini** to prepare the developer for deep wor
 
 ## 📝 Change Log
 - **2026-01-17 [Redesign]:** Full UI Pivot to "Ogaki Digital" aesthetic. Implemented Global Light/Dark Theming (`next-themes`) and fixed Auth SignOut flow. Updated Header/Footer components.
-- **2026-01-17:** Enhanced Landing Page with "Public Issue Browser" (Client Component + Server Action) and high-fidelity sections ("Why FocusFork", "Workflow"). Implemented Mock Fallback for AI Coach.
+- **2026-01-19 [Dashboard Expansion]:** Introduced "My Workspaces" with Monaco Editor integration and "AI Issue Scout" (Chat UI). Moved Issue Browser to Dashboard. Updated Landing Page funnel.
+- **2026-01-17 [Redesign]:** Full UI Pivot to "Ogaki Digital" aesthetic. Implemented Global Light/Dark Theming (`next-themes`) and fixed Auth SignOut flow. Updated Header/Footer components.
+- **2026-01-17:** Enhanced Landing Page high-fidelity sections ("Why FocusFork", "Workflow"). Implemented Mock Fallback for AI Coach.
 - **2026-01-16:** Implemented **Focus Coach Agent** (Phase 4). Integrated Gemini 1.5 Pro and Opik for tracing. Implemented **Issue Scout** logic (Phase 3).
 - **2026-01-15:** Implemented GitHub Authentication (Phase 2). Added SignIn/SignOut components and updated Landing Page.
 - **2026-01-14:** Initialized project, setup Next.js + Tailwind + shadcn/ui. Created folder structure. Defined Vision & Roadmap. Switched AI to Gemini.
