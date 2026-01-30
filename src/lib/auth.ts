@@ -1,6 +1,22 @@
 import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 
+declare module "next-auth" {
+    interface Session {
+        accessToken?: string
+        user: {
+            id?: string
+            name?: string | null
+            email?: string | null
+            image?: string | null
+        }
+    }
+    
+    interface User {
+        id?: string
+    }
+}
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [GitHub],
     theme: {

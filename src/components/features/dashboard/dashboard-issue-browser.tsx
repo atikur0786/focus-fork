@@ -4,28 +4,22 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Search, ExternalLink, Loader2, Bot, Github } from "lucide-react"
+import { Search, Loader2 } from "lucide-react"
 import { searchPublicIssuesAction } from "@/app/actions"
 import { GitHubIssue } from "@/lib/github/scout"
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 const POPULAR_LANGUAGES = ["TypeScript", "JavaScript", "Python", "Rust", "Go"]
 
-export function DashboardIssueBrowser() {
+interface DashboardIssueBrowserProps {
+    onIssueSelect?: (issue: GitHubIssue) => void;
+}
+
+export function DashboardIssueBrowser({ onIssueSelect }: DashboardIssueBrowserProps) {
     const [query, setQuery] = useState("")
     const [issues, setIssues] = useState<GitHubIssue[]>([])
     const [loading, setLoading] = useState(false)
     const [searched, setSearched] = useState(false)
-    const [selectedIssue, setSelectedIssue] = useState<GitHubIssue | null>(null)
-    const router = useRouter()
+    const [selectedIssueId, setSelectedIssueId] = useState<number | null>(null)
 
     const handleSearch = async (term: string) => {
         if (!term.trim()) return
@@ -38,6 +32,13 @@ export function DashboardIssueBrowser() {
             console.error("Search failed", error)
         } finally {
             setLoading(false)
+        }
+    }
+
+    const handleIssueClick = (issue: GitHubIssue) => {
+        setSelectedIssueId(issue.number)
+        if (onIssueSelect) {
+            onIssueSelect(issue)
         }
     }
 
@@ -97,8 +98,11 @@ export function DashboardIssueBrowser() {
                     issues.map((issue) => (
                         <div
                             key={issue.id}
-                            className="group flex items-start justify-between p-4 rounded-xl border border-border bg-card hover:border-primary/30 hover:bg-accent/5 transition-all cursor-pointer"
-                            onClick={() => setSelectedIssue(issue)}
+                            className={`group flex items-start justify-between p-4 rounded-xl border transition-all cursor-pointer ${selectedIssueId === issue.number
+                                    ? "border-primary bg-primary/5 ring-1 ring-primary"
+                                    : "border-border bg-card hover:border-primary/30 hover:bg-accent/5"
+                                }`}
+                            onClick={() => handleIssueClick(issue)}
                         >
                             <div className="space-y-1.5">
                                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -130,42 +134,6 @@ export function DashboardIssueBrowser() {
                     </div>
                 )}
             </div>
-
-            {/* Selection Dialog */}
-            <Dialog open={!!selectedIssue} onOpenChange={(open) => !open && setSelectedIssue(null)}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>Choose Contribution Mode</DialogTitle>
-                        <DialogDescription>
-                            How would you like to tackle <span className="font-medium text-foreground">#{selectedIssue?.number}: {selectedIssue?.title}</span>?
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid grid-cols-2 gap-4 mt-4">
-                        <Link href={selectedIssue?.html_url || "#"} target="_blank" passHref>
-                            <Button variant="outline" className="w-full h-32 flex flex-col gap-3 hover:border-primary hover:bg-primary/5 transition-all group">
-                                <Github className="w-8 h-8 text-muted-foreground group-hover:text-foreground" />
-                                <span className="font-semibold text-lg">Go to GitHub</span>
-                                <span className="text-xs text-muted-foreground text-center">View issue directly on GitHub. No AI assistance.</span>
-                            </Button>
-                        </Link>
-
-                        <Button
-                            variant="outline"
-                            className="w-full h-32 flex flex-col gap-3 hover:border-primary hover:bg-primary/5 transition-all group"
-                            onClick={() => {
-                                if (selectedIssue) {
-                                    // Navigate to workspaces with issue URL
-                                    router.push(`/dashboard/workspaces/${selectedIssue.number}?issueUrl=${encodeURIComponent(selectedIssue.html_url)}`)
-                                }
-                            }}
-                        >
-                            <Bot className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
-                            <span className="font-semibold text-lg text-primary">Solve with Agent</span>
-                            <span className="text-xs text-muted-foreground text-center">Let AI guide you through the contribution process.</span>
-                        </Button>
-                    </div>
-                </DialogContent>
-            </Dialog>
         </div>
     )
 }

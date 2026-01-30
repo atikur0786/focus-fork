@@ -7,11 +7,14 @@ import { RotateCcw, Play, Loader2, ArrowRight } from "lucide-react"
 import { startSessionAction } from "@/app/actions"
 import { FocusPlanDisplay } from "@/components/features/focus/focus-plan-display"
 import { CoachPanel } from "@/components/features/focus/coach-panel"
+import { OpenSourceWorkflow } from "@/components/features/workflow/open-source-workflow"
+import { extractRepoInfoFromUrl } from "@/app/actions"
 
 export default function FocusSessionPage() {
     const [isActive, setIsActive] = useState(false)
     const [loading, setLoading] = useState(false)
     const [sessionData, setSessionData] = useState<any>(null)
+    const [repository, setRepository] = useState<{ owner: string; name: string } | null>(null)
 
     // Quick Timer state for demo
     const [timeLeft, setTimeLeft] = useState(25 * 60)
@@ -42,6 +45,14 @@ export default function FocusSessionPage() {
             } else {
                 setSessionData(result)
                 setIsActive(true) // Auto start timer concept
+                
+                // Extract repository info from issue URL
+                if (result.issue?.html_url) {
+                    const repoInfo = await extractRepoInfoFromUrl(result.issue.html_url)
+                    if (repoInfo) {
+                        setRepository({ owner: repoInfo.owner, name: repoInfo.repo })
+                    }
+                }
             }
         } catch (e) {
             console.error(e)
@@ -142,6 +153,7 @@ export default function FocusSessionPage() {
 
                 {/* Sidebar: AI Coach & Info */}
                 <div className="space-y-6">
+                    <OpenSourceWorkflow issueId={issue.id.toString()} repository={repository || undefined} />
                     <CoachPanel plan={plan} />
                 </div>
             </div>
